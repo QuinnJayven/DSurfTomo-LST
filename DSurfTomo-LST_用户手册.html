@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSurfTomo-LST 用户手册（Windows 版）</title>
+
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#5f6b7a;
+    --line:#d8dee7;
+    --soft:#f6f8fa;
+    --accent:#1f4e79;
+    --accent-soft:#eef5fb;
+    --code:#f3f4f6;
+  }
+
+  *{box-sizing:border-box}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    margin:0;
+    color:var(--ink);
+    background:#fff;
+    font-family:"Microsoft YaHei","Noto Sans CJK SC","PingFang SC",Arial,sans-serif;
+    line-height:1.78;
+    font-size:16px;
+  }
+
+  main{
+    width:min(1020px, calc(100% - 40px));
+    margin:0 auto;
+    padding:42px 0 72px;
+  }
+
+  .title-page{
+    border-bottom:2px solid var(--accent);
+    padding:8px 0 28px;
+    margin-bottom:28px;
+  }
+
+  h1{
+    margin:0 0 8px;
+    font-size:34px;
+    color:#173a5e;
+    letter-spacing:.02em;
+  }
+
+  .subtitle{
+    font-size:19px;
+    color:#334155;
+    margin:0 0 10px;
+  }
+
+  .meta{
+    color:var(--muted);
+    font-size:14px;
+    margin-top:8px;
+  }
+
+  .toc{
+    background:var(--soft);
+    border:1px solid var(--line);
+    padding:18px 22px;
+    margin:24px 0 34px;
+  }
+
+  .toc h2{
+    margin-top:0;
+    border:0;
+    padding:0;
+    font-size:20px;
+  }
+
+  .toc ol{
+    columns:2;
+    column-gap:36px;
+    margin:8px 0 0;
+    padding-left:22px;
+  }
+
+  .toc li{
+    break-inside:avoid;
+    margin:3px 0;
+  }
+
+  .toc a{
+    color:#274c6b;
+    text-decoration:none;
+  }
+
+  h2{
+    margin-top:40px;
+    padding-bottom:7px;
+    border-bottom:1px solid var(--line);
+    color:#173a5e;
+    font-size:24px;
+  }
+
+  h3{
+    margin-top:28px;
+    color:#244f73;
+    font-size:19px;
+  }
+
+  p{margin:10px 0}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0 22px;
+    font-size:14.5px;
+  }
+
+  th,td{
+    border:1px solid var(--line);
+    padding:9px 10px;
+    vertical-align:top;
+  }
+
+  th{
+    background:#eef2f6;
+    text-align:left;
+    font-weight:600;
+  }
+
+  code{
+    font-family:Consolas,"Courier New",monospace;
+    background:var(--code);
+    padding:.1em .35em;
+    border-radius:3px;
+  }
+
+  pre{
+    background:#f7f7f8;
+    border:1px solid #e1e4e8;
+    padding:14px 16px;
+    overflow:auto;
+    white-space:pre;
+    line-height:1.45;
+    font-size:13.5px;
+  }
+
+  pre code{
+    background:transparent;
+    padding:0;
+  }
+
+  .note{
+    margin:16px 0;
+    padding:12px 15px;
+    border-left:4px solid #789;
+    background:#fafbfc;
+  }
+
+  .citation-box{
+    margin:18px 0 12px;
+    padding:14px 18px;
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+  }
+
+  .citation-box p{margin:0}
+
+  .filetree{background:#fbfbfc}
+
+  .ref-list{padding-left:24px}
+
+  .ref-list li{margin:9px 0}
+
+  a{color:#1d5f91}
+
+  .footer{
+    margin-top:50px;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  @media (max-width:760px){
+    main{
+      width:min(100% - 24px, 1020px);
+      padding-top:24px;
+    }
+
+    .toc ol{columns:1}
+
+    h1{font-size:28px}
+
+    table{font-size:13px}
+  }
+
+  @media print{
+    body{font-size:11pt}
+
+    main{
+      width:100%;
+      padding:0;
+    }
+
+    .toc{break-after:page}
+
+    h2{break-after:avoid}
+
+    table,pre,.citation-box{break-inside:avoid}
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+  }
+</style>
+</head>
+
+<body>
+<main>
+
+<section class="title-page">
+  <h1>DSurfTomo-LST 用户手册</h1>
+  <p class="subtitle">Windows 64 位版本</p>
+  <p><strong>Adaptive-Dictionary-Regularized 3-D Direct Inversion of Surface-Wave Dispersion Data</strong></p>
+  <p class="meta">最后更新：2026年10月</p>
+</section>
+
+<nav class="toc">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#s1">程序简介</a></li>
+    <li><a href="#s2">程序文件</a></li>
+    <li><a href="#s3">运行程序</a></li>
+    <li><a href="#s4">面波频散数据</a></li>
+    <li><a href="#s5">初始模型 MOD</a></li>
+    <li><a href="#s6">合成真实模型 MOD.true</a></li>
+    <li><a href="#s7">参数文件 DSurfTomo_lst.in</a></li>
+    <li><a href="#s8">LST 字典参数</a></li>
+    <li><a href="#s9">实际数据与合成测试</a></li>
+    <li><a href="#s10">输出文件</a></li>
+    <li><a href="#s11">模型输出范围</a></li>
+    <li><a href="#s12">常见问题</a></li>
+    <li><a href="#s13">参数取值</a></li>
+    <li><a href="#s14">致谢</a></li>
+    <li><a href="#s15">参考文献</a></li>
+  </ol>
+</nav>
+
+<section id="s1">
+<h2>1. 程序简介</h2>
+
+<p>
+DSurfTomo-LST 是在 DSurfTomo 三维面波频散直接反演程序基础上发展的自适应字典正则化层析成像程序。程序直接利用台站对之间的面波频散数据反演三维横波速度结构，不需要先构建不同周期的二维相速度或群速度图。
+</p>
+
+<p>
+程序保留了 DSurfTomo 的快速行进法（Fast Marching Method, FMM）正演、射线路径更新和三维灵敏度矩阵计算。在此基础上加入局部稀疏正则化：反演初期采用 Laplacian 正则化建立大尺度速度背景，随后切换到基于局部 patch 的字典正则化。各反演深度层使用独立字典，并通过深度方向耦合约束相邻层之间的连续性。
+</p>
+
+<p>
+局部模型采用 OMP（Orthogonal Matching Pursuit）进行稀疏编码，字典采用 ITKM（Iterative Thresholding and signed K-Means）更新。
+</p>
+</section>
+
+<section id="s2">
+<h2>2. 程序文件</h2>
+
+<p>Windows 版包含以下文件：</p>
+
+<pre class="filetree"><code>DSurfTomo-LST/
+├── DSurfTomo_lst.exe
+├── DSurfTomo_lst.in
+├── MOD
+├── MOD.true
+├── Run.bat
+└── surfdataTB.dat</code></pre>
+
+<table>
+<thead>
+<tr><th>文件</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DSurfTomo_lst.exe</code></td><td>Windows 64 位可执行程序。</td></tr>
+<tr><td><code>DSurfTomo_lst.in</code></td><td>主参数文件。</td></tr>
+<tr><td><code>surfdataTB.dat</code></td><td>面波频散数据文件。</td></tr>
+<tr><td><code>MOD</code></td><td>初始横波速度模型。</td></tr>
+<tr><td><code>MOD.true</code></td><td>合成测试使用的真实模型；实际数据反演时不读取。</td></tr>
+<tr><td><code>Run.bat</code></td><td>Windows 启动脚本。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="s3">
+<h2>3. 运行程序</h2>
+
+<h3>3.1 使用 Run.bat</h3>
+
+<p>双击 <code>Run.bat</code> 启动程序。脚本内容如下：</p>
+
+<pre><code>@echo off
+cd /d "%~dp0"
+
+DSurfTomo_lst.exe DSurfTomo_lst.in
+
+echo.
+echo Calculation finished.
+pause</code></pre>
+
+<p>
+<code>cd /d "%~dp0"</code> 将工作目录和盘符切换到 <code>Run.bat</code> 所在目录，使程序能够按相对路径读取同目录中的参数文件、模型和数据文件。
+</p>
+
+<h3>3.2 命令行运行</h3>
+
+<p>在 Windows CMD 或 PowerShell 中进入程序目录后运行：</p>
+
+<pre><code>DSurfTomo_lst.exe DSurfTomo_lst.in</code></pre>
+
+<p>
+程序正常结束时会显示：
+</p>
+
+<pre><code>Program finishes successfully</code></pre>
+
+<p><code>Run.bat</code> 中的 <code>pause</code> 会在程序结束后保留窗口，按任意键即可关闭。</p>
+</section>
+
+<section id="s4">
+<h2>4. 面波频散数据</h2>
+
+<p>
+频散数据文件由 <code>DSurfTomo_lst.in</code> 第一项指定。示例文件名为：
+</p>
+
+<pre><code>surfdataTB.dat</code></pre>
+
+<p>数据格式沿用 DSurfTomo。例如：</p>
+
+<pre><code># 25.148500 121.511100 1 2 0
+25.158529 121.476890 0.7990
+25.133539 121.499190 1.0420
+
+# 25.158529 121.476890 1 2 0
+25.119850 121.473190 0.6460</code></pre>
+
+<p>每组数据以一行源台站信息开始：</p>
+
+<pre><code># source_lat source_lon period_index wave_type velocity_type</code></pre>
+
+<table>
+<thead>
+<tr><th>字段</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><code>source_lat</code></td><td>源台站纬度。</td></tr>
+<tr><td><code>source_lon</code></td><td>源台站经度。</td></tr>
+<tr><td><code>period_index</code></td><td>周期编号，从 1 开始，对应参数文件中该类频散数据的周期顺序。</td></tr>
+<tr><td><code>wave_type</code></td><td>2：Rayleigh 波；1：Love 波。</td></tr>
+<tr><td><code>velocity_type</code></td><td>0：相速度；1：群速度。</td></tr>
+</tbody>
+</table>
+
+<p>随后列出与该源台站配对的接收台站：</p>
+
+<pre><code>receiver_lat receiver_lon velocity</code></pre>
+
+<p>
+其中 <code>receiver_lat</code> 和 <code>receiver_lon</code> 为接收台站纬度和经度，<code>velocity</code> 为该台站对在相应周期上的相速度或群速度。这里的“源台站”和“接收台站”表示程序中一个台站对的两个角色。
+</p>
+
+<p>
+例如，某类频散数据的周期依次为 <code>0.5 0.6 0.7 ...</code> s，则 <code>period_index=1</code> 对应 0.5 s，<code>period_index=2</code> 对应 0.6 s，依此类推。
+</p>
+
+<p>
+若同时使用多种频散数据，数据块按 Rayleigh 波相速度、Rayleigh 波群速度、Love 波相速度、Love 波群速度的顺序组织。
+</p>
+
+<div class="note">
+<strong>合成测试同样需要频散数据文件。</strong>
+程序从该文件读取台站分布、台站对信息、周期和数据类型，再利用 <code>MOD.true</code> 计算合成数据。
+</div>
+</section>
+
+<section id="s5">
+<h2>5. 初始模型 MOD</h2>
+
+<p>程序从运行目录读取文件：</p>
+
+<pre><code>MOD</code></pre>
+
+<p><code>MOD</code> 第一行给出深度节点，单位为 km。例如：</p>
+
+<pre><code>0.0 0.2 0.4 0.6 0.8 1.1 1.4 1.8 2.5</code></pre>
+
+<p>若 <code>nz=9</code>，第一行必须给出 9 个深度节点。</p>
+
+<p>
+其余部分为三维横波速度。文件按深度层分组；每个深度层内按经度方向逐行排列，每行依次给出 <code>nx</code> 个纬度网格点的速度。因此纬度索引变化最快，其次为经度索引，最后为深度索引。
+</p>
+
+<p>对于 <code>nx=18</code>、<code>ny=18</code>、<code>nz=9</code> 的示例：</p>
+
+<ul>
+<li>第一行包含 9 个深度节点；</li>
+<li>随后共有 <code>ny × nz = 162</code> 行速度数据；</li>
+<li>每行包含 <code>nx = 18</code> 个横波速度值。</li>
+</ul>
+
+<p>模型速度单位为 km/s。</p>
+</section>
+
+<section id="s6">
+<h2>6. 合成真实模型 MOD.true</h2>
+
+<p>当参数文件中设置：</p>
+
+<pre><code>synthetic flag = 1</code></pre>
+
+<p>程序读取 <code>MOD.true</code> 作为合成测试的真实速度模型。</p>
+
+<p>
+<code>MOD.true</code> 不包含深度节点行，只包含三维速度值；深度节点仍由 <code>MOD</code> 第一行提供。速度排列顺序与 <code>MOD</code> 中的三维速度部分相同。
+</p>
+
+<p>
+对于 <code>18 × 18 × 9</code> 的模型，<code>MOD.true</code> 包含 162 行速度数据，每行 18 个值。
+</p>
+
+<p>当 <code>synthetic flag = 0</code> 时，程序不读取 <code>MOD.true</code>。</p>
+</section>
+
+<section id="s7">
+<h2>7. 参数文件 DSurfTomo_lst.in</h2>
+
+<p>示例参数如下：</p>
+
+<pre><code>surfdataTB.dat
+18 18 9
+25.2 121.35
+0.015 0.017
+20
+4.0 1.0
+3
+0.5 2.8
+10
+0.2
+26
+0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0
+0
+0
+0
+1
+0.02
+2.0
+
+1
+16.0
+0.5
+4
+16
+2
+5
+50
+0.10
+3</code></pre>
+
+<h3>7.1 基本反演参数</h3>
+
+<table>
+<thead>
+<tr><th>示例值</th><th>参数</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><code>surfdataTB.dat</code></td>
+<td>data file</td>
+<td>频散数据文件名。</td>
+</tr>
+
+<tr>
+<td><code>18 18 9</code></td>
+<td><code>nx ny nz</code></td>
+<td>纬度、经度和深度方向的模型网格节点数。</td>
+</tr>
+
+<tr>
+<td><code>25.2 121.35</code></td>
+<td><code>goxd gozd</code></td>
+<td>模型参考位置的纬度和经度。纬度方向随网格索引增大而减小，经度方向随网格索引增大而增大。</td>
+</tr>
+
+<tr>
+<td><code>0.015 0.017</code></td>
+<td><code>dvxd dvzd</code></td>
+<td>纬度和经度方向的网格间距，单位为度。</td>
+</tr>
+
+<tr>
+<td><code>20</code></td>
+<td>max sources/receivers</td>
+<td>源台站数以及每个源台站对应接收台站数的数组上限。该值应不小于数据中的实际数量。</td>
+</tr>
+
+<tr>
+<td><code>4.0 1.0</code></td>
+<td><code>weight damp</code></td>
+<td><code>weight</code> 为正则化权重尺度；<code>damp</code> 为 warm-up 阶段传入 LSMR 的阻尼参数。</td>
+</tr>
+
+<tr>
+<td><code>3</code></td>
+<td>sublayers</td>
+<td>计算深度灵敏度核时每个模型层采用的子层数。</td>
+</tr>
+
+<tr>
+<td><code>0.5 2.8</code></td>
+<td><code>Minvel Maxvel</code></td>
+<td>模型允许的最小和最大横波速度，单位为 km/s。</td>
+</tr>
+
+<tr>
+<td><code>10</code></td>
+<td>maximum iteration</td>
+<td>最大外循环次数。</td>
+</tr>
+
+<tr>
+<td><code>0.2</code></td>
+<td>sparsity fraction</td>
+<td>用于预分配稀疏灵敏度矩阵存储空间的参数，与字典稀疏度 <code>T_sparse</code> 无关。</td>
+</tr>
+
+<tr>
+<td><code>26</code></td>
+<td><code>kmaxRc</code></td>
+<td>Rayleigh 波相速度的周期数；下一行给出对应周期。</td>
+</tr>
+
+<tr>
+<td><code>0.5 ... 3.0</code></td>
+<td>periods</td>
+<td>Rayleigh 波相速度周期，单位为 s。</td>
+</tr>
+
+<tr>
+<td><code>0</code></td>
+<td><code>kmaxRg</code></td>
+<td>Rayleigh 波群速度的周期数。</td>
+</tr>
+
+<tr>
+<td><code>0</code></td>
+<td><code>kmaxLc</code></td>
+<td>Love 波相速度的周期数。</td>
+</tr>
+
+<tr>
+<td><code>0</code></td>
+<td><code>kmaxLg</code></td>
+<td>Love 波群速度的周期数。</td>
+</tr>
+
+<tr>
+<td><code>1</code></td>
+<td>synthetic flag</td>
+<td>0：实际数据反演；1：合成测试。</td>
+</tr>
+
+<tr>
+<td><code>0.02</code></td>
+<td>noiselevel</td>
+<td>合成测试使用的噪声参数，仅在 <code>synthetic flag=1</code> 时生效。</td>
+</tr>
+
+<tr>
+<td><code>2.0</code></td>
+<td>threshold</td>
+<td>残差异常值筛选参数。</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+当 <code>kmaxRg</code>、<code>kmaxLc</code> 或 <code>kmaxLg</code> 大于 0 时，其下一行应给出相同数量的周期值；当周期数为 0 时，不需要对应的周期行。
+</p>
+
+<p>
+<code>goxd</code> 和 <code>gozd</code> 控制模型的水平位置。程序输出的反演区域纬度范围为
+<code>goxd-(nx-3)×dvxd</code> 至 <code>goxd</code>，经度范围为
+<code>gozd</code> 至 <code>gozd+(ny-3)×dvzd</code>。
+</p>
+
+<p>
+warm-up 阶段使用输入的 <code>damp</code>。进入字典正则化阶段后，LSMR 的 <code>damp</code> 设为 0，字典约束由附加的正则化方程给出。
+</p>
+
+<p>
+每次模型更新后，速度限制在 <code>Minvel</code> 和 <code>Maxvel</code> 范围内；单次速度扰动的绝对值最多为 0.5 km/s。
+</p>
+
+<p>
+<code>threshold</code> 用于残差筛选。每次外循环计算残差的第 25 和第 75 百分位数 <code>q25</code>、<code>q75</code>，不在
+<code>[q25×threshold, q75×threshold]</code> 范围内的数据在该次迭代中的权重设为 0。
+</p>
+
+<h3>7.2 参数文件格式</h3>
+
+<p>
+参数文件开头的前三行是说明行，程序读取后直接跳过，因此这三行应保留。基本反演参数按固定顺序读取。
+</p>
+
+<p>
+LST 参数部分允许出现空行，也允许使用以 <code>c</code>、<code>C</code>、<code>!</code> 或 <code>#</code> 开头的独立注释行。参数值后也可以保留说明文字。
+</p>
+</section>
+
+<section id="s8">
+<h2>8. LST 字典参数</h2>
+
+<p>示例取值：</p>
+
+<pre><code>lam1_dict    = 1.0
+lam2_dict    = 16.0
+lam_z_dict   = 0.5
+nib          = 4
+K_dict       = 16
+T_sparse     = 2
+warmup_iters = 5
+itkm_maxit   = 50
+perc_thresh  = 0.10
+dict_freq    = 3</code></pre>
+
+<table>
+<thead>
+<tr><th>参数</th><th>示例值</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lam1_dict</code></td>
+<td>1.0</td>
+<td>控制字典辅助模型对全局模型更新的约束强度。</td>
+</tr>
+
+<tr>
+<td><code>lam2_dict</code></td>
+<td>16.0</td>
+<td>控制全局模型与重叠 patch 重构结果在辅助模型中的相对权重。</td>
+</tr>
+
+<tr>
+<td><code>lam_z_dict</code></td>
+<td>0.5</td>
+<td>深度方向相邻层的耦合参数；0 表示各层独立。</td>
+</tr>
+
+<tr>
+<td><code>nib</code></td>
+<td>4</td>
+<td>二维 patch 的边长，以网格节点数计。示例中 patch 为 4×4。</td>
+</tr>
+
+<tr>
+<td><code>K_dict</code></td>
+<td>16</td>
+<td>每个反演深度层的字典原子数。</td>
+</tr>
+
+<tr>
+<td><code>T_sparse</code></td>
+<td>2</td>
+<td>稀疏度参数。OMP 最多选取该数量的原子，ITKM 也使用该稀疏度进行字典更新。</td>
+</tr>
+
+<tr>
+<td><code>warmup_iters</code></td>
+<td>5</td>
+<td>切换到字典正则化之前采用 Laplacian 正则化的外循环次数。</td>
+</tr>
+
+<tr>
+<td><code>itkm_maxit</code></td>
+<td>50</td>
+<td>每次字典更新时执行的 ITKM 内部迭代次数。</td>
+</tr>
+
+<tr>
+<td><code>perc_thresh</code></td>
+<td>0.10</td>
+<td>字典训练时允许 patch 内零覆盖节点所占的最大比例。</td>
+</tr>
+
+<tr>
+<td><code>dict_freq</code></td>
+<td>3</td>
+<td>字典更新的外循环间隔。</td>
+</tr>
+</tbody>
+</table>
+
+<h3>8.1 正则化参数</h3>
+
+<p>
+<code>lam1_dict</code> 与 <code>weight</code> 共同控制字典约束在全局反演中的强度。程序加入 LSMR 方程组的字典约束系数与
+<code>sqrt(lam1_dict) × weight</code> 成正比。
+</p>
+
+<p>
+<code>lam2_dict</code> 用于融合全局模型和局部 patch 重构结果。由于程序采用步长为 1 的重叠 patch 并使用周期边界，每个水平网格节点由
+<code>nib²</code> 个 patch 覆盖。当 <code>lam_z_dict=0</code> 且 <code>lam2_dict=nib²</code> 时，全局模型与所有 patch 重构结果的总权重处于相同尺度。示例中 <code>nib=4</code>，因此 <code>nib²=16</code>，并取 <code>lam2_dict=16</code>。
+</p>
+
+<p>
+<code>lam_z_dict</code> 控制相邻深度层之间的联系。取 0 时各层独立；取正值时启用深度方向耦合。
+</p>
+
+<h3>8.2 patch、字典和稀疏度</h3>
+
+<p>
+<code>nib</code> 决定局部 patch 尺寸，<code>K_dict</code> 决定每层字典包含的原子数，<code>T_sparse</code> 决定每个 patch 使用的稀疏表示复杂度。示例中
+<code>nib=4</code>、<code>K_dict=16</code>、<code>T_sparse=2</code>。
+</p>
+
+<p>
+patch 在水平模型上以步长 1 提取，并在模型边界采用 wrap-around（周期边界）处理。
+</p>
+
+<h3>8.3 warm-up 与字典更新</h3>
+
+<p>
+<code>warmup_iters=5</code> 时，第 1–5 次外循环使用 Laplacian 正则化，第 6 次外循环开始使用字典正则化。程序在第 5 次外循环结束时建立并首次更新字典，为下一次迭代准备字典约束。
+</p>
+
+<p>
+<code>dict_freq=3</code> 时，此后每隔 3 次外循环更新一次字典。<code>itkm_maxit=50</code> 表示每次更新执行 50 次 ITKM 内部迭代。
+</p>
+
+<h3>8.4 射线覆盖筛选</h3>
+
+<p>
+程序根据每个模型参数的 DWS 构造归一化覆盖信息，并统计每个 patch 中零覆盖节点的比例。当该比例大于 <code>perc_thresh</code> 时，该 patch 不参加本次 ITKM 字典训练。示例中的 <code>perc_thresh=0.10</code> 表示零覆盖节点超过 10% 的 patch 被排除。
+</p>
+</section>
+
+<section id="s9">
+<h2>9. 实际数据与合成测试</h2>
+
+<h3>9.1 实际数据反演</h3>
+
+<pre><code>synthetic flag = 0</code></pre>
+
+<p>运行时使用：</p>
+
+<pre><code>DSurfTomo_lst.in
+surfdataTB.dat
+MOD</code></pre>
+
+<p><code>MOD.true</code> 不参与实际数据反演。</p>
+
+<h3>9.2 合成测试</h3>
+
+<pre><code>synthetic flag = 1</code></pre>
+
+<p>运行时使用：</p>
+
+<pre><code>DSurfTomo_lst.in
+surfdataTB.dat
+MOD
+MOD.true</code></pre>
+
+<p>
+<code>MOD</code> 为反演初始模型，<code>MOD.true</code> 为真实模型。程序根据 <code>surfdataTB.dat</code> 中的台站分布、台站对关系、周期和数据类型，利用 <code>MOD.true</code> 计算合成数据，再从 <code>MOD</code> 开始反演。
+</p>
+</section>
+
+<section id="s10">
+<h2>10. 输出文件</h2>
+
+<h3>10.1 日志文件</h3>
+
+<p>若参数文件名为 <code>DSurfTomo_lst.in</code>，日志文件为：</p>
+
+<pre><code>DSurfTomo_lst.in.log</code></pre>
+
+<p>日志中记录模型参数、周期、LST 参数、各次迭代的残差信息、速度扰动和主要运行信息。</p>
+
+<h3>10.2 每次迭代的速度模型</h3>
+
+<pre><code>DSurfTomo_lst.inMeasure.dat.iter001
+DSurfTomo_lst.inMeasure.dat.iter002
+...
+DSurfTomo_lst.inMeasure.dat.iter010</code></pre>
+
+<p>每行格式为：</p>
+
+<pre><code>longitude latitude depth Vs</code></pre>
+
+<p>其中经纬度单位为度，深度单位为 km，<code>Vs</code> 单位为 km/s。</p>
+
+<h3>10.3 实际数据最终模型</h3>
+
+<p>当 <code>synthetic flag=0</code> 时，最终模型写入：</p>
+
+<pre><code>DSurfTomo_lst.inMeasure.dat</code></pre>
+
+<p>数据格式与迭代模型相同。</p>
+
+<h3>10.4 合成测试输出</h3>
+
+<p>当 <code>synthetic flag=1</code> 时，程序输出：</p>
+
+<pre><code>Vs_model.real
+DSurfTomo_lst.inSyn.dat</code></pre>
+
+<p>
+<code>Vs_model.real</code> 为真实模型，<code>DSurfTomo_lst.inSyn.dat</code> 为最终反演模型。两者均采用：
+</p>
+
+<pre><code>longitude latitude depth Vs</code></pre>
+
+<h3>10.5 残差文件</h3>
+
+<pre><code>residualFirst.dat
+residualLast.dat</code></pre>
+
+<p>分别保存第一次和最后一次外循环的数据拟合结果。每行包含六列：</p>
+
+<pre><code>Distance ForwardT ObserveT weightedForwardT weightedObserveT weight</code></pre>
+
+<h3>10.6 DWS</h3>
+
+<pre><code>norm_dws.dat</code></pre>
+
+<p>
+该文件保存最后一次外循环计算得到的 DWS（Derivative Weight Sum）。每行格式为：
+</p>
+
+<pre><code>longitude latitude depth DWS</code></pre>
+
+<p>第四列为对应模型参数的数据灵敏度矩阵列绝对值之和。</p>
+
+<h3>10.7 字典文件</h3>
+
+<p>程序结束后输出字典元数据，以及各反演深度层的初始字典和最终字典：</p>
+
+<pre><code>DSurfTomo_lst.in.dict_metadata.txt
+
+DSurfTomo_lst.in.dict_initial_layer001.txt
+...
+DSurfTomo_lst.in.dict_final_layer001.txt
+...</code></pre>
+
+<p>
+初始字典为程序初始化的 DCT 字典，最终字典为反演结束时保存的字典。每个字典文件的矩阵大小为
+<code>nib² × K_dict</code>，每一列对应一个字典原子。
+</p>
+
+<p>
+示例中 <code>nib=4</code>、<code>K_dict=16</code>，因此每个字典文件为 16 行 × 16 列。参与字典正则化的深度层数为 <code>nz-1</code>。
+</p>
+</section>
+
+<section id="s11">
+<h2>11. 模型输出范围</h2>
+
+<p>输入模型网格为 <code>nx × ny × nz</code>，实际参与反演并写入速度结果的节点数为：</p>
+
+<pre><code>(nx - 2) × (ny - 2) × (nz - 1)</code></pre>
+
+<p>对于示例模型：</p>
+
+<pre><code>nx = 18
+ny = 18
+nz = 9
+
+输出节点数 = 16 × 16 × 8 = 2048</code></pre>
+
+<p>
+水平方向最外侧一圈节点不作为独立反演参数，最深的第 <code>nz</code> 个深度节点也不作为独立反演层。因此后处理、绘图和合成测试误差计算应使用实际输出的节点范围。
+</p>
+</section>
+
+<section id="s12">
+<h2>12. 常见问题</h2>
+
+<h3>12.1 unable to open the inputfile</h3>
+
+<pre><code>STOP unable to open the inputfile</code></pre>
+
+<p>程序未找到指定的参数文件。检查参数文件名、文件所在目录和启动命令。</p>
+
+<h3>12.2 MOD 或 MOD.true 无法读取</h3>
+
+<p>
+检查文件名及格式是否正确。Windows 若隐藏已知文件类型的扩展名，实际文件可能被保存为 <code>MOD.txt</code> 或 <code>MOD.true.txt</code>。
+</p>
+
+<h3>12.3 increase sparsity fraction(spfra)</h3>
+
+<pre><code>increase sparsity fraction(spfra)</code></pre>
+
+<p>
+表示为稀疏灵敏度矩阵预分配的空间不足，应增大 <code>DSurfTomo_lst.in</code> 中的 <code>sparsity fraction</code>。该参数只控制存储空间，与 <code>T_sparse</code> 无关。
+</p>
+
+<h3>12.4 LST 参数检查</h3>
+
+<p>程序启动时检查以下条件：</p>
+
+<pre><code>nx > 2
+ny > 2
+nz > 1
+Minvel < Maxvel
+nib >= 1
+K_dict >= 1
+1 <= T_sparse <= K_dict
+lam2_dict > 0
+lam_z_dict >= 0
+warmup_iters >= 0
+dict_freq >= 1</code></pre>
+</section>
+
+<section id="s13">
+<h2>13. 参数取值</h2>
+
+<p>
+DSurfTomo-LST 论文中的参数敏感性分析给出了下列经验范围。不同数据集可通过 checkerboard、spike 等合成试验确定最终参数。
+</p>
+
+<table>
+<thead>
+<tr><th>参数</th><th>经验范围或取值方式</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nib</code></td>
+<td>论文中建议 patch 边长约为较短一侧水平模型网格数的 1/10。本示例取 4。</td>
+</tr>
+
+<tr>
+<td><code>K_dict</code></td>
+<td>通常取 <code>nib²</code> 至约 <code>1.5×nib²</code>。</td>
+</tr>
+
+<tr>
+<td><code>T_sparse</code></td>
+<td>通常取 2–4。</td>
+</tr>
+
+<tr>
+<td><code>warmup_iters</code></td>
+<td>通常取 1–5，并与总外循环次数配合设置。</td>
+</tr>
+
+<tr>
+<td><code>dict_freq</code></td>
+<td>通常每 2–3 次外循环更新一次字典。</td>
+</tr>
+
+<tr>
+<td><code>lam1_dict</code></td>
+<td>通过合成试验或参数扫描确定。</td>
+</tr>
+
+<tr>
+<td><code>lam2_dict</code></td>
+<td>通过合成试验或参数扫描确定。</td>
+</tr>
+
+<tr>
+<td><code>lam_z_dict</code></td>
+<td>通过合成试验或参数扫描确定。</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="s14">
+<h2>14. 致谢</h2>
+
+<p>
+  DSurfTomo-LST 由 DSurfTomo 程序发展而来。衷心感谢方洪健教授和姚华建教授开发并公开共享 DSurfTomo 源代码。DSurfTomo 为本程序的实现提供了直接而重要的基础，也使后续方法的改进与扩展成为可能。
+</p>
+
+<p>
+  本程序包中用于测试和演示的面波频散数据取自 DSurfTomo 程序包，感谢原作者提供相关程序和示例数据。
+</p>
+
+<p>
+  DSurfTomo-LST 的局部稀疏建模和自适应字典学习部分采用了 Michael J. Bianco 和 Peter Gerstoft 提出的 LST 方法，并在两位作者公开的相关代码基础上进行了适配和改写，使其能够用于 DSurfTomo 的三维面波频散直接反演框架。感谢两位作者对相关方法和代码的公开分享。
+</p>
+</section>
+
+<section id="s15">
+<h2>15. 参考文献</h2>
+
+<div class="citation-box">
+<p><strong>如果本代码对您的研究有帮助，欢迎引用以下文献：</strong></p>
+</div>
+
+<ol class="ref-list">
+<li>
+<strong>Z. Li, J. Ding, X. Cheng, R. He, X. Zhou and Z. Chen</strong>,
+“Adaptive-Dictionary-Regularized 3-D Direct Inversion of Surface-Wave Dispersion Data,”
+<em>IEEE Transactions on Geoscience and Remote Sensing</em>,
+vol. 64, pp. 5919117-5919117, 2026, Art. no. 5919117,
+doi:
+<a href="https://doi.org/10.1109/TGRS.2026.3736453">10.1109/TGRS.2026.3736453</a>.
+</li>
+</ol>
+
+
+
+<ol class="ref-list" start="2">
+<li>
+H. Fang, H. Yao, H. Zhang, Y. C. Huang, and R. D. van der Hilst,
+“Direct inversion of surface wave dispersion for three-dimensional shallow crustal structure based on ray tracing: methodology and application,”
+<em>Geophysical Journal International</em>,
+vol. 201, no. 3, pp. 1251–1263, 2015.
+doi:
+<a href=" https://doi.org/10.1093/gji/ggv080">10.1093/gji/ggv080</a>.
+</li>
+
+
+<li>
+M. J. Bianco and P. Gerstoft,
+“Travel Time Tomography With Adaptive Dictionaries,”
+<em>IEEE Transactions on Computational Imaging</em>,
+vol. 4, no. 4, pp. 499–511, 2018,
+doi:
+<a href="https://doi.org/10.1109/TCI.2018.2862644">10.1109/TCI.2018.2862644</a>.
+</li>
+</ol>
+</section>
+
+<div class="footer">
+DSurfTomo-LST 用户手册 · Windows 64 位版本
+</div>
+
+</main>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

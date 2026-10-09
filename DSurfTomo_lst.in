@@ -1,0 +1,36 @@
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c INPUT PARAMETERS
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+surfdataTB.dat                   c: data file
+18 18 9                          c: nx ny nz (grid numbers in latitude, longitude, and depth)
+25.2  121.35                     c: goxd gozd (model origin [lat, lon])
+0.015 0.017                      c: dvxd dvzd (grid intervals in latitude and longitude)
+20                               c: maximum number of sources/receivers
+4.0  1.0                         c: weight damp (damp is used in warm-up and set to 0 internally in dictionary stage)
+3                                c: sublayers (for computing depth sensitivity kernels, typically 2-5)
+0.5 2.8                          c: minimum velocity, maximum velocity (km/s)
+10                               c: maximum number of outer iterations
+0.2                              c: sparsity fraction for sensitivity-matrix storage
+26                               c: kmaxRc (number of Rayleigh-wave phase-velocity periods)
+0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0
+0                                c: kmaxRg (number of Rayleigh-wave group-velocity periods)
+0                                c: kmaxLc (number of Love-wave phase-velocity periods)
+0                                c: kmaxLg (number of Love-wave group-velocity periods)
+1                                c: synthetic flag (0: real data, 1: synthetic test)
+0.02                             c: noise level for synthetic test
+2.0                              c: residual screening threshold
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c LST DICTIONARY REGULARIZATION PARAMETERS
+c Blank lines and standalone comment lines beginning with c/C/!/# are allowed.
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+1                                c: lam1_dict  global-local coupling
+16.0                             c: lam2_dict  global-patch balance
+0.5                              c: lam_z_dict depth coupling (0: independent layers, >0: coupled layers)
+4                                c: nib        patch edge length in grid points
+16                               c: K_dict     number of dictionary atoms per depth layer
+2                                c: T_sparse   OMP/ITKM sparsity level
+5                                c: warmup_iters  number of Laplacian warm-up outer iterations
+50                               c: itkm_maxit ITKM inner iterations per dictionary update
+0.10                             c: perc_thresh  exclude training patches with >10% zero-coverage nodes
+3                                c: dict_freq  dictionary update interval in outer iterations
