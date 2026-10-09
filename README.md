@@ -49,7 +49,7 @@ DSurfTomo_lst.exe DSurfTomo_lst.in
 
 输入参数、数据格式和输出文件的详细说明见：
 
-[DSurfTomo-LST 中文用户手册](Manual/DSurfTomo-LST_用户手册_CN.html)
+[DSurfTomo-LST 中文用户手册](Manual/DSurfTomo-LST_用户手册.html)
 
 ## 引用
 
@@ -126,7 +126,7 @@ DSurfTomo_lst.exe DSurfTomo_lst.in
 
 For details on the input parameters, data format, and output files, see:
 
-[DSurfTomo-LST Chinese User Manual](Manual/DSurfTomo-LST_用户手册_CN.html)
+[DSurfTomo-LST Chinese User Manual](Manual/DSurfTomo-LST_用户手册.html)
 
 ## Citation
 
