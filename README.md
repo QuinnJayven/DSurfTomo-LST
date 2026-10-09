@@ -16,7 +16,7 @@ DSurfTomo-LST 是在 DSurfTomo 三维面波频散直接反演程序基础上发�
 
 反演初期采用 Laplacian 正则化建立大尺度速度背景，随后切换到基于局部 patch 的字典正则化。局部模型采用 OMP（Orthogonal Matching Pursuit）进行稀疏编码，并采用 ITKM（Iterative Thresholding and signed K-Means）更新字典。不同反演深度层使用独立字典，同时通过深度方向耦合约束相邻层之间的连续性。
 
-本仓库提供 Windows 64 位可执行程序、示例输入文件和用户手册。
+本仓库提供 Windows 64 位可执行程序、示例输入文件和用户手册。由于相关研究项目仍在进行，源代码计划于 2027 年公开。
 
 ## 主要文件
 
@@ -93,7 +93,7 @@ The program directly inverts interstation surface-wave dispersion measurements f
 
 The inversion starts with Laplacian regularization to establish the large-scale velocity structure and then switches to dictionary-based regularization. Local patches are sparsely represented using Orthogonal Matching Pursuit (OMP), and the dictionaries are updated using Iterative Thresholding and signed K-Means (ITKM). An independent dictionary is used for each inverted depth layer, with an additional depth-coupling term to maintain continuity between neighboring layers.
 
-This repository provides a Windows 64-bit executable, example input files, and a user manual.
+This repository provides a Windows 64-bit executable, example input files, and a user manual. The source code is planned for public release in 2027, following the completion of the related ongoing research project.
 
 ## Main Files
 
